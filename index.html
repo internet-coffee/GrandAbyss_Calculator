@@ -154,7 +154,18 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context){
+                                    let value = context.parsed.y;
+                                    return `機率：${value}%`;
+                                }
+                            }        
+                        }
+                    },
                     scales: {
                         y: { beginAtZero: true, ticks: { callback: v => v + '%' } }
                     }
