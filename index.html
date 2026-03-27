@@ -26,34 +26,15 @@
                 <div class="space-y-6">
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-3">選擇計算模式</label>
-                        <div class="grid grid-cols-1 gap-3">
-                            <label class="mode-card cursor-pointer relative">
-                                <input type="radio" name="mode" value="1" class="peer sr-only" checked>
-                                <div class="p-4 border-2 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50 hover:bg-gray-50 border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-medium text-gray-900">預測抵達樓層</span>
-                                        <span class="text-indigo-600 opacity-0 peer-checked:opacity-100 font-bold">✓</span>
-                                    </div>
-                                </div>
-                            </label>
-                            <label class="mode-card cursor-pointer relative">
-                                <input type="radio" name="mode" value="2" class="peer sr-only">
-                                <div class="p-4 border-2 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50 hover:bg-gray-50 border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-medium text-gray-900">檢測我的運氣</span>
-                                        <span class="text-indigo-600 opacity-0 peer-checked:opacity-100 font-bold">✓</span>
-                                    </div>
-                                </div>
-                            </label>
-                            <label class="mode-card cursor-pointer relative">
-                                <input type="radio" name="mode" value="3" class="peer sr-only">
-                                <div class="p-4 border-2 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50 hover:bg-gray-50 border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-medium text-gray-900">樓層消耗查詢</span>
-                                        <span class="text-indigo-600 opacity-0 peer-checked:opacity-100 font-bold">✓</span>
-                                    </div>
-                                </div>
-                            </label>
+                        <div class="relative">
+                            <select id="mode-select" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl appearance-none focus:border-indigo-600 focus:outline-indigo-600 text-gray-900 font-medium cursor-pointer">
+                                <option value="1">預測抵達樓層</option>
+                                <option value="2">檢測我的運氣</option>
+                                <option value="3">樓層消耗查詢</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
                         </div>
                     </div>
                     <div id="input-container" class="grid grid-cols-1 gap-4"></div>
@@ -112,7 +93,7 @@
         let chartData = { labels: [], values: [] };
 
         function renderInputs() {
-            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const mode = document.getElementById('mode-select').value;
             document.getElementById('input-container').innerHTML = modeMap[mode].map(key => `
                 <div class="relative">
                     <label class="text-xs font-bold text-gray-500 absolute -top-2 left-3 bg-white px-1 z-10">${inputs[key].label}</label>
@@ -189,10 +170,10 @@
             }
         });
 
-        document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', renderInputs));
+        document.getElementById('mode-select').addEventListener('change', renderInputs);
 
         document.getElementById('calculate-btn').addEventListener('click', () => {
-            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const mode = document.getElementById('mode-select').value;
             const resDiv = document.getElementById('results');
             resDiv.innerHTML = '';
             chartData = { labels: [], values: [] };
