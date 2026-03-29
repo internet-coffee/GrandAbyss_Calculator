@@ -3,7 +3,7 @@
 這是一個基於網頁的工具，旨在幫助玩家計算《貓咪大戰爭》中的地底迷宮挑戰，根據剩餘角色數量和預計損失場次，預測能夠抵達的樓層，或者查詢特定樓層所需的貓咪消耗機率。
 
 ## 網站
-[地底迷宮機率計算機](https://kevin970712.github.io/GrandAbyss_Calculator/)
+[地底迷宮機率計算機](https://internet-coffee.github.io/GrandAbyss_Calculator/)
 
 ## 功能介紹
 
